@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Read = () => {
   const [data, setData] = useState([]);
+  const [tabledark, setTableDark] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,21 +33,34 @@ const Read = () => {
       });
   }
 
-  const setToLocalStorage = (id, name, email) =>{
-    localStorage.setItem("id", id)
-    localStorage.setItem("name", name)
-    localStorage.setItem("email", email)
-  }
+  const setToLocalStorage = (id, name, email) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+  };
 
   return (
     <>
+      <div className="form-check form-switch">
+        <input
+          className="form-check-input"
+          onClick={() => {
+            if (tabledark === "table-dark") {
+              setTableDark("");
+            } else {
+              setTableDark("table-dark");
+            }
+          }}
+          type="checkbox"
+        />
+      </div>
       <div className="d-flex justify-content-between m-2 p-2">
         <h1>Read</h1>
         <Link to="/">
           <button className="btn btn-secondary">Create</button>
         </Link>
       </div>
-      <table className="table">
+      <table className={`table ${tabledark}`} >
         <thead>
           <tr>
             <th scope="col">#</th>
